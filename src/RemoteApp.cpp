@@ -63,8 +63,10 @@ int joystick (int xy) {
  
   if(xy == 0) xy=0;
 
+  Serial.println("Joystick Before Map: " + String(xy));
   if(xy>0) xy=(int)map(xy,0,100,175,255);
   if(xy<0) xy=(int)map(xy,-100,0,255,175);
+  Serial.println("Joystick After Map: " + String(xy));
   return xy;
 }
 
