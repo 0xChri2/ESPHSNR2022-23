@@ -35,7 +35,7 @@ enum{
   red_lamp = 6,
   green_lamp = 7,
 };
-bool servo_val = false;
+bool servo_val = 0;
 bool autopilot = false;
 
 Servo servo;
@@ -86,7 +86,7 @@ void setup() {
 void loop() {
   RemoteXY_Handler ();
   // tells what the sensor is reading and what to do
-  control_servo(servo_val);
+  servo_val = control_servo(servo_val);
   if(set_control_mode(autopilot)) {
     switch (readSensor(sensor_right, sensor_left)) {
       case 1:
@@ -127,3 +127,5 @@ void loop() {
     }
   }
 }
+
+

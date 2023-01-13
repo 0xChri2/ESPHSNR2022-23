@@ -3,6 +3,7 @@
 #include <ESP32Servo.h>
 
 extern Servo servo;
+TRemoteXY RemoteXY;
 
 /**
 *
@@ -95,17 +96,18 @@ int set_control_mode(bool autopilot) {
  *
  * Servo Grenzwerte: 0-180
  **/
-void control_servo(bool servo_val) {
+int control_servo(bool servo_val) {
   // Open Servo
-  if (RemoteXY.switch_1 == 1 && servo_val == true) {
-    servo_val = true;
+  if (RemoteXY.switch_1 == 1 && servo_val == 0) {
+    servo_val = 1;
     Serial.printf("Servo: %d\n", servo_val);
     servo.write(50);
   }
   // Close Servo
-  if (RemoteXY.switch_1 == 0 && servo_val == true) {
-    servo_val = false;
+  if (RemoteXY.switch_1 == 0 && servo_val == 1) {
+    servo_val = 0;
     Serial.printf("Servo: %d\n", servo_val);
     servo.write(165);
   }
+  return servo_val;
 }
